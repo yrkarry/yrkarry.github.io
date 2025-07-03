@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平凉红牛 - 产品介绍</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-red: #b71c1c;
+            --dark-red: #7f0000;
+            --gold: #d4af37;
+            --light-gold: #f9e076;
+            --brown: #5d4037;
+            --light-brown: #8d6e63;
+            --cream: #f5f0e6;
+            --green: #2e7d32;
+            --dark-green: #1b5e20;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f9f5e9, #fff9c7);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-red);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--brown);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* 主要内容区域 - 包含侧边栏和内容区 */
+        .content-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 侧边导航栏 */
+        .side-nav {
+            flex: 0 0 250px;
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 130px);
+            margin-right: 30px;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        .side-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .side-nav li {
+            margin-bottom: 5px;
+        }
+
+        .side-nav a {
+            display: block;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--brown);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .side-nav a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-red);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .side-nav a:hover,
+        .side-nav a.active {
+            background: rgba(183, 28, 28, 0.05);
+            color: var(--primary-red);
+            transform: translateX(5px);
+        }
+
+        .side-nav a:hover::before,
+        .side-nav a.active::before {
+            transform: scaleY(1);
+        }
+
+        .side-nav i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* 主内容区 */
+        main {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 2.5rem;
+            color: var(--dark-red);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown);
+            max-width: 700px;
+            margin: 0 auto 3px;
+            text-align: center;
+        }
+        /* 产品展示区 - 翻转效果 */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 70px 0;
+        }
+
+        .product-card {
+            perspective: 1000px;
+            height: 350px;
+        }
+
+        .product-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .product-card:hover .product-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-front,
+        .product-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-front {
+            background: linear-gradient(45deg, #fff, var(--cream));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-back {
+            background: linear-gradient(45deg, var(--dark-red), var(--primary-red));
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .product-img {
+            width: 120px;
+            height: 120px;
+            background: var(--light-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 3rem;
+            color: var(--primary-red);
+        }
+
+        .product-front h3 {
+            font-size: 1.8rem;
+            color: var(--dark-red);
+            margin-bottom: 10px;
+        }
+
+        /* 页脚样式 - 简洁风格 */
+       footer {
+         background: var(--dark-green);
+         color: white;
+         border-radius: 20px 20px 0 0;
+         margin-top: 60px;
+       }
+       
+       .copyright {
+         text-align: center;
+         padding: 20px 15px;
+         font-size: 1rem;
+       }
+       
+       .copyright p {
+         margin: 0;
+       }
+        /* 动画关键帧 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .side-nav {
+                flex: 0 0 100%;
+                position: static;
+                height: auto;
+                margin-right: 0;
+                margin-bottom: 30px;
+                padding-right: 0;
+            }
+            
+            .side-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .side-nav li {
+                margin-bottom: 0;
+                flex: 1 1 auto;
+            }
+            
+            .side-nav a {
+                text-align: center;
+                padding: 10px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-buttons {
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* 视频区域样式 */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 宽高比 */
+            margin: 50px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 产品详情部分 */
+        .product-details {
+            margin: 80px 0;
+        }
+
+        .product-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 80px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .product-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-detail:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .product-image {
+            flex: 1 1 300px;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-detail:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            flex: 2 1 400px;
+            padding: 40px;
+        }
+
+        .product-info h3 {
+            font-size: 2rem;
+            color: var(--dark-red);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .product-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        .product-info p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .product-info .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-red);
+            margin-top: 25px;
+        }
+
+        .product-info .btn {
+            margin-top: 20px;
+        }
+
+        /* 营养成分表 */
+        .nutrition-facts {
+            margin: 80px 0;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .nutrition-facts h3 {
+            font-size: 1.8rem;
+            color: var(--dark-red);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .nutrition-table th,
+        .nutrition-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nutrition-table th {
+            background: var(--cream);
+            color: var(--dark-red);
+            font-weight: 700;
+        }
+
+        .nutrition-table tr:last-child td {
+            border-bottom: none;
+        }
+
+       /* 食用方法 - 两栏布局 */
+       .method-content {
+           display: flex;
+           flex-wrap: wrap;
+           gap: 30px;
+       }
+       
+       .method-steps {
+           flex: 1;
+           min-width: 300px;
+       }
+       
+       .method-image {
+           flex: 1;
+           min-width: 300px;
+           border-radius: 10px;
+           overflow: hidden;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           perspective: 1000px; /* 添加透视效果 */
+       }
+       
+       .method-image img {
+           width: 100%;
+           height: auto;
+           max-height: 300px;
+           object-fit: cover;
+           transition: transform 0.7s ease;
+           transform-style: preserve-3d; /* 保持3D变换 */
+       }
+       
+       .method-card:hover .method-image img {
+           transform: rotateY(-45deg) scale(1.05); /* 悬停时Y轴旋转20度并轻微放大 */
+           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 添加阴影增强效果 */
+       }
+       
+       @media (max-width: 768px) {
+           .method-content {
+               flex-direction: column;
+           }
+           
+           .method-image {
+               order: -1;
+           }
+           
+           .method-card:hover .method-image img {
+               transform: rotateY(0) scale(1.05); /* 在移动设备上只保留缩放效果 */
+           }
+       }
+
+        /* 滚动到顶部按钮 */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-red);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        .scroll-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fas fa-cow"></i>
+            <span>平凉红牛</span>
+        </a>
+
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="product.html" class="active"><i class="fas fa-info-circle"></i> 产品介绍</a></li>
+                <li><a href="city.html"><i class="fas fa-map-marker-alt"></i> 产地特色</a></li>
+                <li><a href="process.html"><i class="fas fa-industry"></i> 生产过程</a></li>
+                <li><a href="worth.html"><i class="fas fa-apple-alt"></i> 营养价值</a></li>
+                <li><a href="shop.html"><i class="fas fa-apple-alt"></i> 购买渠道</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-buttons">
+            <button class="btn btn-outline" id="loginBtn"><i class="fas fa-user"></i> 登录</button>
+            <button class="btn btn-primary" id="buy"><i class="fas fa-shopping-cart"></i> 下单</button>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 - 包含侧边栏和内容区 -->
+    <div class="content-container">
+        <!-- 侧边导航栏 -->
+        <aside class="side-nav">
+            <ul>
+                <li><a href="#intro" class="active"><i class="fas fa-info-circle"></i> 视频宣传</a></li>
+                <li><a href="#details"><i class="fas fa-list-ul"></i> 产品详情</a></li>
+                <li><a href="#nutrition-facts"><i class="fas fa-apple-alt"></i> 产品成分</a></li>
+                <li><a href="#cooking-methods"><i class="fas fa-fire"></i> 食用方法</a></li>
+            </ul>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main>
+            <!-- 产品介绍标题 -->
+            <div id="intro" class="section-title">
+                <h2>视频宣传</h2>
+            </div>
+            <p class="section-subtitle">深入了解平凉红牛的独特魅力</p>
+
+            <!-- 宣传视频 -->
+            <div class="video-container">
+                <iframe width="560" height="315" src="//player.bilibili.com/player.html?isOutside=true&aid=30446665&bvid=BV18s411F76r&cid=53128710&p=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+			</div>
+
+            
+
+            <!-- 产品详情 -->
+            <div id="details" class="section-title">
+                <h2>产品详情</h2>
+            </div>
+            <p class="section-subtitle">精选平凉红牛不同部位，满足您对高品质牛肉的所有需求</p>
+
+            <div class="product-details">
+                <!-- 红牛里脊 -->
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img src="https://img.izhixiu.com/22/0523/22052313453.jpg" alt="红牛里脊" style="object-position: center;">
+                    </div>
+                    <div class="product-info">
+                        <h3>红牛里脊</h3>
+                        <p>取自牛腰部内侧的最长肌，是牛肉中最细嫩的部位。平凉红牛里脊肉质紧实，大理石纹分布均匀，
+                            脂肪含量适中，肉质鲜嫩多汁，口感细腻。适合煎制、烤制，尤其是制作牛排和烤肉串的理想选择。</p>
+                        <p>每100g平凉红牛里脊含有：</p>
+                        <ul>
+                            <li>蛋白质22.5g - 提供优质动物蛋白，有助于肌肉修复和生长</li>
+                            <li>脂肪5.3g - 低脂肪含量，适合关注健康饮食的消费者</li>
+                            <li>维生素B6、B12 - 促进新陈代谢，维持神经系统健康</li>
+                            <li>铁、锌等矿物质 - 增强免疫力，改善贫血</li>
+                        </ul>
+                        <div class="price">¥40/kg</div>
+                        <button class="btn btn-primary">立即购买</button>
+                    </div>
+                </div>
+
+                <!-- 红牛肋排 -->
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img src="https://img95.699pic.com/photo/50616/1190.jpg_wh300.jpg!/fh/300/quality/90" alt="红牛肋排" style="object-position: center;">
+                    </div>
+                    <div class="product-info">
+                        <h3>红牛肋排</h3>
+                        <p>取自牛胸部的肋骨部位，肉层厚实，脂肪分布均匀，肉质鲜嫩多汁，骨香浓郁。平凉红牛肋排经过精心饲养，
+                            肉质与脂肪比例完美，烹饪后骨肉易分离，肉香四溢，口感丰富。适合炖煮、红烧、烤制，尤其是制作烤肋排和红烧牛肉的理想选择。</p>
+                        <p>每100g平凉红牛肋排含有：</p>
+                        <ul>
+                            <li>蛋白质19.8g - 提供优质动物蛋白，增强体力</li>
+                            <li>脂肪12.5g - 适量的脂肪含量，增加口感的丰富度</li>
+                            <li>钙、磷等矿物质 - 有助于骨骼健康，补充钙质</li>
+                            <li>胶原蛋白 - 保持皮肤弹性，延缓衰老</li>
+                        </ul>
+                        <div class="price">¥42/kg</div>
+                        <button class="btn btn-primary">立即购买</button>
+                    </div>
+                </div>
+
+                <!-- 红牛牛腩 -->
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img src="https://ts2.tc.mm.bing.net/th/id/OIP-C.UECfqGAoaTOJAaLeCzyfAwHaE7?cb=thvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="红牛牛腩" style="object-position: center;">
+                    </div>
+                    <div class="product-info">
+                        <h3>红牛牛腩</h3>
+                        <p>取自牛腹部的肌肉组织，肉质层次分明，带有适量的筋膜，口感软糯有嚼劲。平凉红牛牛腩经过长时间慢炖，
+                            筋膜软化，肉质酥烂，汤汁浓郁，营养丰富。适合炖煮、红烧、煲汤，尤其是制作番茄牛腩、萝卜牛腩和牛腩汤的理想选择。</p>
+                        <p>每100g平凉红牛牛腩含有：</p>
+                        <ul>
+                            <li>蛋白质21.3g - 优质蛋白质来源，促进肌肉生长</li>
+                            <li>脂肪8.7g - 中等脂肪含量，提供饱腹感</li>
+                            <li>维生素B群 - 参与能量代谢，维持神经系统正常功能</li>
+                            <li>氨基酸 - 促进新陈代谢，增强免疫力</li>
+                        </ul>
+                        <div class="price">¥46/kg</div>
+                        <button class="btn btn-primary">立即购买</button>
+                    </div>
+                </div>
+
+                <!-- 红牛牛尾 -->
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img src="https://file.youlai.cn/cnkfile1/M02/72/B2/8C5BDD13D95DFD1AB537BB76E72072B2.jpeg" alt="红牛牛尾" style="object-position: center;">
+                    </div>
+                    <div class="product-info">
+                        <h3>红牛牛尾</h3>
+                        <p>取自牛尾部的肉质部分，富含胶原蛋白和骨髓，肉质紧实有嚼劲。平凉红牛牛尾经过精心处理，
+                            去除多余的脂肪，保留丰富的胶原蛋白和骨髓，烹饪后口感软糯，汤汁浓郁，营养丰富。适合炖煮、红烧、煲汤，
+                            尤其是制作牛尾汤、红烧牛尾和牛尾火锅的理想选择。</p>
+                        <p>每100g平凉红牛牛尾含有：</p>
+                        <ul>
+                            <li>蛋白质18.5g - 提供身体所需的氨基酸</li>
+                            <li>胶原蛋白 - 保持皮肤弹性，促进关节健康</li>
+                            <li>钙、磷等矿物质 - 增强骨骼健康，补充钙质</li>
+                            <li>骨髓 - 富含不饱和脂肪酸，促进大脑健康</li>
+                        </ul>
+                        <div class="price">¥48/kg</div>
+                        <button class="btn btn-primary">立即购买</button>
+                    </div>
+                </div>
+
+                <!-- 红牛牛排 -->
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img src="https://imgs.699pic.com/images/600/617/496.jpg!list1x.v2" alt="红牛牛排" style="object-position: center;">
+                    </div>
+                    <div class="product-info">
+                        <h3>红牛牛排</h3>
+                        <p>采用西式切割工艺，精选牛背部的优质肌肉部位，大理石花纹分布均匀，肉质鲜嫩多汁。平凉红牛牛排经过严格的质量控制，
+                            保证每一块牛排的品质和口感。适合煎制、烤制，尤其是制作菲力牛排、肉眼牛排和西冷牛排的理想选择。</p>
+                        <p>每100g平凉红牛牛排含有：</p>
+                        <ul>
+                            <li>蛋白质20.8g - 提供优质动物蛋白，促进肌肉修复</li>
+                            <li>脂肪9.2g - 适量的脂肪含量，增加牛排的鲜嫩口感</li>
+                            <li>铁、锌等矿物质 - 增强免疫力，改善贫血</li>
+                            <li>维生素B群 - 参与能量代谢，维持神经系统正常功能</li>
+                        </ul>
+                        <div class="price">¥41/kg</div>
+                        <button class="btn btn-primary">立即购买</button>
+                    </div>
+                </div>
+
+                <!-- 红牛牛腱 -->
+                <div class="product-detail">
+                    <div class="product-image">
+                        <img src="https://img95.699pic.com/photo/50050/8341.jpg_wh300.jpg" alt="红牛牛腱" style="object-position: center;">
+                    </div>
+                    <div class="product-info">
+                        <h3>红牛牛腱</h3>
+                        <p>取自牛腿部的肌肉组织，富含筋腱和胶原蛋白，肉质紧实有嚼劲。平凉红牛牛腱经过精心处理，
+                            去除多余的脂肪和筋膜，保留丰富的胶原蛋白和筋腱，烹饪后口感筋道，肉质紧实，营养丰富。适合卤制、红烧、炖煮，
+                            尤其是制作卤牛腱、红烧牛腱和牛腱火锅的理想选择。</p>
+                        <p>每100g平凉红牛牛腱含有：</p>
+                        <ul>
+                            <li>蛋白质21.6g - 提供优质动物蛋白，促进肌肉生长</li>
+                            <li>胶原蛋白 - 保持皮肤弹性，促进关节健康</li>
+                            <li>钙、磷等矿物质 - 增强骨骼健康，补充钙质</li>
+                            <li>铁、锌等微量元素 - 提高免疫力，促进新陈代谢</li>
+                        </ul>
+                        <div class="price">¥46/kg</div>
+                        <button class="btn btn-primary">立即购买</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 营养成分表 -->
+            <div id="nutrition-facts" class="nutrition-facts">
+                <h3>平凉红牛营养成分表</h3>
+                <table class="nutrition-table">
+                    <tbody><tr>
+                        <th>营养成分</th>
+                        <th>每100克含量</th>
+                        <th>营养素参考值%</th>
+                    </tr>
+                    <tr>
+                        <td>能量</td>
+                        <td>1050千焦</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr>
+                        <td>蛋白质</td>
+                        <td>21.5克</td>
+                        <td>36%</td>
+                    </tr>
+                    <tr>
+                        <td>脂肪</td>
+                        <td>8.2克</td>
+                        <td>14%</td>
+                    </tr>
+                    <tr>
+                        <td>饱和脂肪酸</td>
+                        <td>3.1克</td>
+                        <td>16%</td>
+                    </tr>
+                    <tr>
+                        <td>碳水化合物</td>
+                        <td>0.7克</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>钠</td>
+                        <td>54毫克</td>
+                        <td>3%</td>
+                    </tr>
+                    <tr>
+                        <td>钾</td>
+                        <td>320毫克</td>
+                        <td>16%</td>
+                    </tr>
+                    <tr>
+                        <td>钙</td>
+                        <td>18毫克</td>
+                        <td>2%</td>
+                    </tr>
+                    <tr>
+                        <td>铁</td>
+                        <td>2.8毫克</td>
+                        <td>16%</td>
+                    </tr>
+                    <tr>
+                        <td>锌</td>
+                        <td>4.3毫克</td>
+                        <td>22%</td>
+                    </tr>
+                    <tr>
+                        <td>维生素B12</td>
+                        <td>2.1微克</td>
+                        <td>35%</td>
+                    </tr>
+                </tbody></table>
+            </div>
+
+            <!-- 食用方法 -->
+            <div id="cooking-methods" class="section-title">
+                <h2>食用方法</h2>
+            </div>
+            <p class="section-subtitle">不同部位的平凉红牛适合不同的烹饪方式，以下是一些建议</p>
+            
+            <div class="cooking-methods">
+                <div class="method-card">
+                    <div class="method-content">
+                        <div class="method-steps">
+                            <h4>煎制牛排</h4>
+                            <p>适合部位：里脊、肉眼、西冷</p>
+                            <p>步骤：</p>
+                            <ul>
+                                <li>牛排提前从冰箱取出，回温至室温</li>
+                                <li>用厨房纸吸干表面水分</li>
+                                <li>撒上适量盐和黑胡椒，两面按摩均匀</li>
+                                <li>热锅冷油，放入牛排，每面煎2-3分钟（根据厚度调整）</li>
+                                <li>煎至表面金黄，内部达到理想熟度（建议5-7分熟）</li>
+                                <li>取出牛排，静置5分钟，让肉汁分布均匀</li>
+                                <li>搭配蔬菜和酱汁食用</li>
+                            </ul>
+                        </div>
+                        <div class="method-image">
+                            <img src="https://ts1.tc.mm.bing.net/th/id/R-C.28bdc97fdc01e38ab86826705e1853b2?rik=QQcc1Bl3ejOaFw&riu=http%3a%2f%2fn.sinaimg.cn%2fsinakd20113%2f26%2fw1000h626%2f20201130%2facf2-kentcvy7372175.jpg&ehk=f7GE5HpRXq9VM8ga1ES8ZmCE5OYkdqrngCq6WpGkS2A%3d&risl=&pid=ImgRaw&r=0" alt="煎制牛排" />
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="method-card">
+                    <div class="method-content">
+                        <div class="method-steps">
+                            <h4>炖煮牛肉</h4>
+                            <p>适合部位：牛腩、牛尾、牛腱</p>
+                            <p>步骤：</p>
+                            <ul>
+                                <li>牛肉切成适当大小，冷水下锅，加入姜片和料酒，焯水去腥</li>
+                                <li>捞出牛肉，用清水冲洗干净</li>
+                                <li>热锅冷油，放入葱姜蒜爆香</li>
+                                <li>加入牛肉翻炒至表面微黄</li>
+                                <li>加入适量生抽、老抽、料酒、冰糖等调味料翻炒均匀</li>
+                                <li>加入热水，没过牛肉，大火烧开后转小火慢炖1-2小时（根据部位调整时间）</li>
+                                <li>加入配菜（如萝卜、土豆、番茄等），继续炖煮30分钟至配菜软烂</li>
+                                <li>最后加盐调味，收汁即可</li>
+                            </ul>
+                        </div>
+                        <div class="method-image">
+                            <img src="https://img95.699pic.com/photo/50050/8341.jpg_wh300.jpg" alt="炖煮牛肉" />
+                        </div>
+                    </div>
+                </div>
+            &nbsp;
+                <div class="method-card">
+                    <div class="method-content">
+                        <div class="method-steps">
+                            <h4>卤制牛肉</h4>
+                            <p>适合部位：牛腱、牛腩</p>
+                            <p>步骤：</p>
+                            <ul>
+                                <li>牛肉切成大块，冷水下锅，加入姜片和料酒，焯水去腥</li>
+                                <li>捞出牛肉，用清水冲洗干净</li>
+                                <li>准备卤料包（八角、桂皮、香叶、花椒、干辣椒、草果等）</li>
+                                <li>锅中加入适量清水，放入卤料包、姜片、葱段、生抽、老抽、冰糖、料酒等调味料</li>
+                                <li>大火烧开后转小火煮30分钟，让卤汁入味</li>
+                                <li>放入牛肉，大火烧开后转小火卤煮1-2小时（根据部位调整时间）</li>
+                                <li>卤好后不要立即取出，让牛肉浸泡在卤汁中几个小时，使其更加入味</li>
+                                <li>捞出牛肉，切片装盘，可根据个人口味搭配蘸料食用</li>
+                            </ul>
+                        </div>
+                        <div class="method-image">
+                            <img src="https://img95.699pic.com/photo/50616/1190.jpg_wh300.jpg!/fh/300/quality/90" alt="卤制牛肉" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+	<footer><div class="copyright">
+		<p>© 2025  杨荣  版权所有  |  20235104124</p>
+	</div></footer>
+	
+		
+	
+
+    <!-- 滚动到顶部按钮 -->
+    <a href="#" class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // 导航栏点击事件
+        document.querySelectorAll('.side-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // 移除所有导航项的active类
+                document.querySelectorAll('.side-nav a').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // 添加当前导航项的active类
+                this.classList.add('active');
+                
+                // 平滑滚动到目标位置
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 监听滚动事件，更新导航项状态
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('main > div[id]');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.offsetHeight;
+                
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentSection = '#' + section.getAttribute('id');
+                }
+            });
+            
+            // 更新导航项状态
+            document.querySelectorAll('.side-nav a').forEach(anchor => {
+                anchor.classList.remove('active');
+                
+                if (anchor.getAttribute('href') === currentSection) {
+                    anchor.classList.add('active');
+                }
+            });
+            
+            // 显示/隐藏滚动到顶部按钮
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('active');
+            } else {
+                scrollToTopBtn.classList.remove('active');
+            }
+        });
+
+        // 滚动到顶部按钮点击事件
+        document.getElementById('scrollToTop').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            // 显示登录模态框（如果使用模态框）
+            // 或跳转到登录页面
+             window.location.href ='login.html';
+        });
+
+        document.getElementById('buy').addEventListener('click', () => {
+            // 显示下单页面
+            window.location.href = 'order.html'; 
+        });
+		
+		
+
+        // 为产品详情卡片添加滚动动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const productDetails = document.querySelectorAll('.product-detail');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            productDetails.forEach(detail => {
+                detail.style.opacity = '0';
+                detail.style.transform = 'translateY(30px)';
+                detail.style.transition = 'all 0.8s ease';
+                observer.observe(detail);
+            });
+        });
+    </script>
+</body>
+
+</html>

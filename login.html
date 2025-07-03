@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平凉红牛 - 登录与下单</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #b71c1c;
+            --dark-red: #7f0000;
+            --gold: #d4af37;
+            --light-gold: #f9e076;
+            --brown: #5d4037;
+            --light-brown: #8d6e63;
+            --cream: #f5f0e6;
+            --green: #2e7d32;
+            --dark-green: #1b5e20;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 15px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f9f5e9, #fff9c7);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-red);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--brown);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            min-height: 70vh;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 2.5rem;
+            color: var(--dark-red);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        /* 登录表单 */
+        .login-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--gold), var(--dark-red));
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-red);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--cream);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.1);
+            outline: none;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input {
+            accent-color: var(--primary-red);
+        }
+
+        .forgot-password {
+            color: var(--primary-red);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            position: relative;
+            margin-bottom: 20px;
+            color: var(--brown);
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream);
+            color: var(--primary-red);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid #ddd;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-red);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--brown);
+        }
+
+        .register-link a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 1rem;
+        }
+
+        .copyright p {
+            margin: 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-buttons {
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .login-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-cow"></i>
+            <span>平凉红牛</span>
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="product.html" class="active"><i class="fas fa-info-circle"></i> 产品介绍</a></li>
+                <li><a href="city.html"><i class="fas fa-map-marker-alt"></i> 产地特色</a></li>
+                <li><a href="process.html"><i class="fas fa-industry"></i> 生产过程</a></li>
+                <li><a href="worth.html"><i class="fas fa-apple-alt"></i> 营养价值</a></li>
+                <li><a href="shop.html"><i class="fas fa-apple-alt"></i> 购买渠道</a></li>
+            </ul>
+        </nav>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-outline" id="loginBtn"><i class="fas fa-user"></i> 登录</button>
+            <button class="btn btn-primary" id="buy"><i class="fas fa-shopping-cart"></i> 下单</button>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+        <!-- 登录页面 -->
+        <div id="loginPage">
+            <div class="section-title">
+                <h2>欢迎登录</h2>
+            </div>
+            <p class="section-subtitle">登录您的账户，享受更多会员权益和专属优惠</p>
+            
+            <div class="login-container">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username"><i class="fas fa-user"></i> 用户名 / 手机号</label>
+                        <input type="text" id="username" class="form-control" placeholder="请输入用户名或手机号" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> 密码</label>
+                        <input type="password" id="password" class="form-control" placeholder="请输入密码" required>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">记住我</label>
+                        </div>
+                        <a href="#" class="forgot-password">忘记密码?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary login-btn">
+                        <i class="fas fa-sign-in-alt"></i> 登录
+                    </button>
+                    
+                    <div class="social-login">
+                        <p>或使用其他方式登录</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-qq"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-weibo"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="register-link">
+                        还没有账户? <a href="#" id="registerLink">立即注册</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚区域 -->
+    <footer>
+        <div class="copyright">
+            <p>© 2025 杨荣 版权所有 | 20235104124</p>
+        </div>
+    </footer>
+
+    <script>
+        // 登录表单提交
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 简单验证
+            if(username && password) {
+                alert('登录成功！即将跳转至下单页面');
+                // 在实际应用中这里会跳转到下单页面
+                window.location.href = "order.html";
+            } else {
+                alert('请输入用户名和密码');
+            }
+        });
+		document.getElementById('loginBtn').addEventListener('click', () => {
+		    // 显示登录模态框（如果使用模态框）
+		    // 或跳转到登录页面
+		     window.location.href ='login.html';
+		});
+		
+		document.getElementById('buy').addEventListener('click', () => {
+		    // 显示下单页面
+		    window.location.href = 'order.html'; 
+		});
+		
+    </script>
+</body>
+</html>

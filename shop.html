@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平凉红牛 - 购买渠道</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #b71c1c;
+            --dark-red: #7f0000;
+            --gold: #d4af37;
+            --light-gold: #f9e076;
+            --brown: #5d4037;
+            --light-brown: #8d6e63;
+            --cream: #f5f0e6;
+            --green: #2e7d32;
+            --dark-green: #1b5e20;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f9f5e9, #fff9c7);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-red);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--brown);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 2.5rem;
+            color: var(--dark-red);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        /* 购买渠道卡片 */
+        .purchase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .channel-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            height: 350px;
+            perspective: 1000px;
+        }
+
+        .channel-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .channel-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .channel-card:hover .channel-inner {
+            transform: rotateY(180deg);
+        }
+
+        .channel-front,
+        .channel-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .channel-front {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #fff, var(--cream));
+        }
+
+        .channel-back {
+            background: linear-gradient(135deg, var(--dark-red), var(--primary-red));
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .channel-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--light-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 3rem;
+            color: var(--primary-red);
+        }
+
+        .channel-front h3 {
+            font-size: 1.8rem;
+            color: var(--dark-red);
+            margin-bottom: 15px;
+        }
+
+        .channel-front p {
+            color: var(--brown);
+            margin-bottom: 20px;
+        }
+
+        .channel-back h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--light-gold);
+        }
+
+        .channel-back p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .channel-back ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .channel-back li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+        }
+
+        .channel-back li:last-child {
+            border-bottom: none;
+        }
+
+        .channel-back li i {
+            margin-right: 10px;
+            color: var(--light-gold);
+        }
+
+        /* 地图区域 */
+        .map-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .map-container {
+            margin-top: 30px;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(183, 28, 28, 0.1), rgba(249, 224, 118, 0.1));
+            pointer-events: none;
+            border-radius: 10px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 1rem;
+        }
+
+        .copyright p {
+            margin: 0;
+        }
+
+        /* 动画关键帧 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 15px;
+            }
+
+            .purchase-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-buttons {
+                margin-top: 15px;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .purchase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-cow"></i>
+            <span>平凉红牛</span>
+        </a>
+
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="product.html" class="active"><i class="fas fa-info-circle"></i> 产品介绍</a></li>
+                <li><a href="city.html"><i class="fas fa-map-marker-alt"></i> 产地特色</a></li>
+                <li><a href="process.html"><i class="fas fa-industry"></i> 生产过程</a></li>
+                <li><a href="worth.html"><i class="fas fa-apple-alt"></i> 营养价值</a></li>
+                <li><a href="shop.html"><i class="fas fa-apple-alt"></i> 购买渠道</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-buttons">
+            <button class="btn btn-outline" id="loginBtn"><i class="fas fa-user"></i> 登录</button>
+            <button class="btn btn-primary" id="buy"><i class="fas fa-shopping-cart"></i> 下单</button>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+        <div class="section-title">
+            <h2>购买渠道</h2>
+        </div>
+        <p class="section-subtitle">平凉红牛已在全国多个渠道销售，您可以选择最方便的购买方式，享受高品质的平凉红牛产品</p>
+
+        <!-- 购买渠道卡片网格 -->
+        <div class="purchase-grid">
+            <!-- 线下专卖店 -->
+            <div class="channel-card">
+                <div class="channel-inner">
+                    <div class="channel-front">
+                        <div class="channel-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>线下专卖店</h3>
+                        <p>全国200+门店覆盖各大城市</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 点击查看详情</p>
+                    </div>
+                    <div class="channel-back">
+                        <h3>线下专卖店</h3>
+                        <p>亲临门店体验，专业导购为您服务</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 全国200+门店</li>
+                            <li><i class="fas fa-check"></i> 现场切割服务</li>
+                            <li><i class="fas fa-check"></i> 专业烹饪指导</li>
+                            <li><i class="fas fa-check"></i> 会员专属优惠</li>
+                        </ul>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-red);">查找附近门店</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 官方小程序 -->
+            <div class="channel-card">
+                <div class="channel-inner">
+                    <div class="channel-front">
+                        <div class="channel-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>官方小程序</h3>
+                        <p>扫码进入，一键下单</p>
+                        <p><i class="fas fa-qrcode"></i> 扫码立即购买</p>
+                    </div>
+                    <div class="channel-back">
+                        <h3>官方小程序</h3>
+                        <p>微信扫码，享受便捷购物体验</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 新人专享优惠</li>
+                            <li><i class="fas fa-check"></i> 会员积分兑换</li>
+                            <li><i class="fas fa-check"></i> 专属客服服务</li>
+                            <li><i class="fas fa-check"></i> 订单实时追踪</li>
+                        </ul>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-red);">扫码购买</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 电商平台 -->
+            <div class="channel-card">
+                <div class="channel-inner">
+                    <div class="channel-front">
+                        <div class="channel-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3>电商平台</h3>
+                        <p>京东/天猫官方旗舰店</p>
+                        <p><i class="fas fa-truck"></i> 全国配送</p>
+                    </div>
+                    <div class="channel-back">
+                        <h3>电商平台</h3>
+                        <p>足不出户，享受新鲜美味</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 京东生鲜旗舰店</li>
+                            <li><i class="fas fa-check"></i> 天猫超市</li>
+                            <li><i class="fas fa-check"></i> 拼多多官方店</li>
+                            <li><i class="fas fa-check"></i> 抖音商城</li>
+                        </ul>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-red);">前往购买</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 生鲜配送 -->
+            <div class="channel-card">
+                <div class="channel-inner">
+                    <div class="channel-front">
+                        <div class="channel-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>生鲜配送</h3>
+                        <p>顺丰冷链直达</p>
+                        <p><i class="fas fa-snowflake"></i> 全程-18℃保鲜</p>
+                    </div>
+                    <div class="channel-back">
+                        <h3>生鲜配送</h3>
+                        <p>专业冷链，新鲜直达餐桌</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 顺丰冷链配送</li>
+                            <li><i class="fas fa-check"></i> 全国24-48小时达</li>
+                            <li><i class="fas fa-check"></i> -18℃全程保鲜</li>
+                            <li><i class="fas fa-check"></i> 开箱验货保障</li>
+                        </ul>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-red);">立即下单</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 超市专柜 -->
+            <div class="channel-card">
+                <div class="channel-inner">
+                    <div class="channel-front">
+                        <div class="channel-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>超市专柜</h3>
+                        <p>全国大型商超专柜</p>
+                        <p><i class="fas fa-store-alt"></i> 就近购买</p>
+                    </div>
+                    <div class="channel-back">
+                        <h3>超市专柜</h3>
+                        <p>日常购物，轻松带回家</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 永辉超市专柜</li>
+                            <li><i class="fas fa-check"></i> 华润万家专柜</li>
+                            <li><i class="fas fa-check"></i> 沃尔玛专柜</li>
+                            <li><i class="fas fa-check"></i> 大润发专柜</li>
+                        </ul>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-red);">查找超市</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 批发渠道 -->
+            <div class="channel-card">
+                <div class="channel-inner">
+                    <div class="channel-front">
+                        <div class="channel-icon">
+                            <i class="fas fa-warehouse"></i>
+                        </div>
+                        <h3>批发渠道</h3>
+                        <p>餐饮企业、酒店批发</p>
+                        <p><i class="fas fa-utensils"></i> 大宗采购优惠</p>
+                    </div>
+                    <div class="channel-back">
+                        <h3>批发渠道</h3>
+                        <p>专业服务餐饮企业，量大优惠</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> 餐饮企业专供</li>
+                            <li><i class="fas fa-check"></i> 酒店定制服务</li>
+                            <li><i class="fas fa-check"></i> 稳定货源供应</li>
+                            <li><i class="fas fa-check"></i> 专属客户经理</li>
+                        </ul>
+                        <button class="btn btn-outline" style="background: white; color: var(--primary-red);">联系批发</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 线下门店地图 -->
+        <div class="map-section">
+            <h2 class="section-title">线下门店分布</h2>
+            <p>平凉红牛在全国各大城市设有专卖店，点击地图查看您附近的门店</p>
+            
+            <div class="map-container">
+                <iframe src="https://map.baidu.com/@12700000,3882000,12z" allowfullscreen></iframe>
+                <div class="map-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚区域 -->
+    <footer>
+        <div class="copyright">
+            <p>© 2025 杨荣 版权所有 | 20235104124</p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航按钮功能
+       document.getElementById('loginBtn').addEventListener('click', () => {
+           // 显示登录模态框（如果使用模态框）
+           // 或跳转到登录页面
+            window.location.href ='login.html';
+       });
+       
+       document.getElementById('buy').addEventListener('click', () => {
+           // 显示下单页面
+           window.location.href = 'order.html'; 
+       });
+
+        // 卡片滚动动画效果
+        function animateCards() {
+            const cards = document.querySelectorAll('.channel-card');
+            
+            cards.forEach((card, index) => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.9) {
+                    setTimeout(() => {
+                        card.classList.add('active');
+                    }, 200 * index);
+                }
+            });
+        }
+        
+        // 初始化滚动动画
+        document.addEventListener('DOMContentLoaded', animateCards);
+        window.addEventListener('scroll', animateCards);
+        
+        // 为每个购买按钮添加点击事件
+        document.querySelectorAll('.btn-outline').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.channel-card');
+                const title = card.querySelector('h3').textContent;
+                alert(`即将跳转到${title}购买页面`);
+            });
+        });
+    </script>
+</body>
+
+</html>

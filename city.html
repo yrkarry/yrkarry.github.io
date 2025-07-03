@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>平凉红牛 - 产地特色</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-red: #b71c1c;
+  --dark-red: #7f0000;
+  --gold: #d4af37;
+  --light-gold: #f9e076;
+  --brown: #5d4037;
+  --light-brown: #8d6e63;
+  --cream: #f5f0e6;
+  --green: #2e7d32;
+  --dark-green: #1b5e20;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Serif SC', serif;
+  background: linear-gradient(135deg, #f9f5e9, #fff9c7);
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 头部样式 */
+header {
+  background: linear-gradient(135deg, var(--gold), var(--light-gold));
+  color: white;
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--dark-red);
+  text-decoration: none;
+}
+
+.logo i {
+  color: var(--primary-red);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* 导航菜单 */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--brown);
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  padding: 5px 0;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--primary-red);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--primary-red);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--primary-red);
+  color: white;
+  box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+}
+
+.btn-primary:hover {
+  background: var(--dark-red);
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary-red);
+  color: var(--primary-red);
+}
+
+.btn-outline:hover {
+  background: var(--primary-red);
+  color: white;
+}
+
+/* 页脚样式 */
+footer {
+  background: var(--dark-green);
+  color: white;
+  border-radius: 20px 20px 0 0;
+  margin-top: 60px;
+}
+
+.copyright {
+  text-align: center;
+  padding: 20px 15px;
+  font-size: 1rem;
+}
+
+.copyright p {
+  margin: 0;
+}
+
+/* 主要内容区域 */
+.main-content {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  font-size: 2.5rem;
+  color: var(--dark-red);
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--primary-red);
+  border-radius: 2px;
+}
+
+/* 特色卡片 */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 60px 0;
+}
+
+.feature-item {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.feature-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.feature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.feature-item:hover .feature-image img {
+  transform: scale(1.1);
+}
+
+.feature-content {
+  padding: 25px;
+}
+
+.feature-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--dark-red);
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.feature-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--primary-red);
+  border-radius: 3px;
+}
+
+.feature-content p {
+  color: var(--brown);
+  margin-bottom: 15px;
+  text-indent: 30px;
+}
+
+/* 地图区域 */
+.map-section {
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin: 60px 0;
+  text-align: center;
+}
+
+.map-container {
+  margin-top: 30px;
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.map-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(183, 28, 28, 0.1);
+  pointer-events: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-buttons {
+    margin-top: 15px;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  .nav-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+}
+</style>
+</head>
+
+<body>
+  <!-- 头部区域 -->
+  <header>
+    <a href="index.html" class="logo">
+      <i class="fas fa-cow"></i>
+      <span>平凉红牛</span>
+    </a>
+    
+    <nav>
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+        <li><a href="product.html" class="active"><i class="fas fa-info-circle"></i> 产品介绍</a></li>
+        <li><a href="city.html"><i class="fas fa-map-marker-alt"></i> 产地特色</a></li>
+        <li><a href="process.html"><i class="fas fa-industry"></i> 生产过程</a></li>
+        <li><a href="worth.html"><i class="fas fa-apple-alt"></i> 营养价值</a></li>
+        <li><a href="shop.html"><i class="fas fa-apple-alt"></i> 购买渠道</a></li>
+      </ul>
+    </nav>
+    
+    <div class="nav-buttons">
+      <button class="btn btn-outline" id="loginBtn"><i class="fas fa-user"></i> 登录</button>
+      <button class="btn btn-primary" id="buy"><i class="fas fa-shopping-cart"></i> 下单</button>
+    </div>
+  </header>
+
+  <!-- 主要内容区域 -->
+  <div class="main-content">
+    <h1 class="section-title">平凉红牛 · 产地特色</h1>
+
+    
+    <!-- 平凉特色介绍 -->
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="https://xgs.newgscloud.com/upload/news/image/2022/09/22/1663808721459015289.jpg?h=857&w=1600" alt="地理环境">
+        </div>
+        <div class="feature-content">
+          <h3>独特地理环境</h3>
+          <p>平凉市位于黄土高原腹地，海拔1200-1800米，属温带半干旱气候，昼夜温差大，日照充足，年降水量适中，为红牛提供了理想的生长环境。</p>
+          <p>黄土高原特有的土壤富含矿物质，牧草营养丰富，是平凉红牛肉质优良的重要原因。</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.EcetMFX-lCvNR28iiOvYugHaEK?w=286&h=180&c=7&r=0&o=5&cb=thvnext&dpr=2&pid=1.7" alt="水质特点">
+        </div>
+        <div class="feature-content">
+          <h3>纯净优质水源</h3>
+          <p>平凉境内有泾河、渭河两大水系，水质纯净，富含多种矿物质和微量元素。红牛饮用这些天然水源，促进了其健康生长。</p>
+          <p>经检测，平凉地区水质硬度适中，pH值呈弱碱性，特别适合牲畜饮用和牧草灌溉。</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.IHoEsrwwzZ-aw5p11nVolAHaFj?w=231&h=180&c=7&r=0&o=5&cb=thvnext&dpr=2&pid=1.7" alt="牧草资源">
+        </div>
+        <div class="feature-content">
+          <h3>丰富牧草资源</h3>
+          <p>平凉地区拥有广阔的天然草场和人工种植的优质牧草，如紫花苜蓿、黑麦草等，蛋白质含量高，营养丰富。</p>
+          <p>当地农民采用"粮草轮作"的传统耕作方式，既保证了粮食生产，又为红牛提供了充足的优质饲料。</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="https://img3.qianzhan.com/news/202306/15/20230615-d47d8fcf4a233736_760x5000.jpg" alt="养殖传统">
+        </div>
+        <div class="feature-content">
+          <h3>悠久养殖传统</h3>
+          <p>平凉地区养牛历史可追溯至3000多年前，当地农民积累了丰富的养殖经验，形成了独特的"平凉红牛"养殖技术体系。</p>
+          <p>传统与现代养殖技术相结合，保证了红牛品质的稳定和提升。</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="https://ts1.tc.mm.bing.net/th/id/R-C.8a52c729d1ee3a9d45cef23614072dc5?rik=%2bXr1L9QLj6mKuA&riu=http%3a%2f%2fvip-public.people.com.cn%2fphoto%2f2024%2f6%2f4%2f01f44592f5cf4758a454096c1c5d58b9g3Wv_m.jpg&ehk=Qe%2bGGqgo71mAGuevTR4vMrjxLn1bkHlsHUWP4DXj9ts%3d&risl=&pid=ImgRaw&r=0" alt="生态环境">
+        </div>
+        <div class="feature-content">
+          <h3>优良生态环境</h3>
+          <p>平凉市森林覆盖率高，空气质量优良，工业污染少，为红牛提供了纯净的生长环境。</p>
+          <p>当地政府高度重视生态环境保护，实施严格的污染防治措施，确保红牛产业可持续发展。</p>
+        </div>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-image">
+          <img src="https://ts4.tc.mm.bing.net/th/id/OIP-C.g-YTwTHWDRTkhaGTllGBrAHaFN?cb=thvnext&pid=ImgDet&w=474&h=333&rs=1&o=7&rm=3" alt="文化底蕴">
+        </div>
+        <div class="feature-content">
+          <h3>深厚文化底蕴</h3>
+          <p>平凉是古丝绸之路重镇，农耕文化与游牧文化在此交融，形成了独特的牛文化。</p>
+          <p>当地有许多与牛相关的传统节日和民俗活动，体现了人与牛的和谐共生关系。</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 平凉地图 -->
+    <div class="map-section">
+      <h2>平凉地理位置</h2>
+      <p>平凉市位于甘肃省东部，地处陕甘宁三省区交汇处，是古丝绸之路必经之地，地理位置优越，交通便利。</p>
+      
+      <div class="map-container">
+        <iframe src="https://map.baidu.com/@12700000,3882000,12z" allowfullscreen></iframe>
+        <div class="map-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚区域 -->
+  <footer>
+    <div class="copyright">
+      <p>© 2025 杨荣 版权所有 | 20235104124</p>
+    </div>
+  </footer>
+
+  <script>
+	  
+    // 页面加载动画
+    document.addEventListener('DOMContentLoaded', () => {
+      const features = document.querySelectorAll('.feature-item');
+      
+      features.forEach((feature, index) => {
+        setTimeout(() => {
+          feature.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          feature.style.opacity = '1';
+          feature.style.transform = 'translateY(0)';
+        }, 200 * index);
+      });
+    });
+    
+    // 导航按钮功能
+   document.getElementById('loginBtn').addEventListener('click', () => {
+       // 显示登录模态框（如果使用模态框）
+       // 或跳转到登录页面
+        window.location.href ='login.html';
+   });
+   
+   document.getElementById('buy').addEventListener('click', () => {
+       // 显示下单页面
+       window.location.href = 'order.html'; 
+   });
+  </script>
+</body>
+</html>

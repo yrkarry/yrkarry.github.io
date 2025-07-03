@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平凉红牛 - 营养价值</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #b71c1c;
+            --dark-red: #7f0000;
+            --gold: #d4af37;
+            --light-gold: #f9e076;
+            --brown: #5d4037;
+            --light-brown: #8d6e63;
+            --cream: #f5f0e6;
+            --green: #2e7d32;
+            --dark-green: #1b5e20;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f9f5e9, #fff9c7);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-red);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--brown);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* 单张大图区域 */
+        .hero-banner {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1546964124-0cce460f38ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover no-repeat;
+        }
+
+
+        .hero-content {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-family: 'Ma Shan Zheng', cursive;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content h1 span {
+            color: var(--light-gold);
+            position: relative;
+        }
+
+        .hero-content h1 span::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: rgba(212, 175, 55, 0.5);
+            z-index: -1;
+            border-radius: 5px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        
+
+        /* 主要内容区域 */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 2.5rem;
+            color: var(--dark-red);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        /* 营养特性卡片 */
+        .nutrition-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            transform: translateY(0);
+            position: relative;
+            opacity: 0;
+        }
+
+        .feature-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-header {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .feature-header i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--light-gold);
+        }
+
+        .feature-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-content {
+            padding: 25px;
+        }
+
+        .feature-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--brown);
+        }
+
+        .feature-content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .feature-content li {
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--light-brown);
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-content li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-content li i {
+            color: var(--primary-red);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* 营养成分表 */
+        .nutrition-facts {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 80px 0;
+            overflow: hidden;
+        }
+
+        .facts-header {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .facts-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .facts-content {
+            padding: 40px;
+        }
+
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .nutrition-table th,
+        .nutrition-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nutrition-table th {
+            background: var(--cream);
+            color: var(--dark-red);
+            font-weight: 700;
+        }
+
+        .nutrition-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 健康益处 */
+        .health-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            transform: translateY(0);
+            opacity: 0;
+        }
+
+        .benefit-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefit-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .benefit-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .benefit-card:hover .benefit-image img {
+            transform: scale(1.1);
+        }
+
+        .benefit-content {
+            padding: 25px;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.6rem;
+            color: var(--dark-red);
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .benefit-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 3px;
+        }
+
+        .benefit-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--brown);
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 1rem;
+        }
+
+        .copyright p {
+            margin: 0;
+        }
+
+        /* 动画关键帧 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero-banner {
+                height: 500px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-buttons {
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .hero-banner {
+                height: 450px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-cow"></i>
+            <span>平凉红牛</span>
+        </a>
+
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="product.html" class="active"><i class="fas fa-info-circle"></i> 产品介绍</a></li>
+                <li><a href="city.html"><i class="fas fa-map-marker-alt"></i> 产地特色</a></li>
+                <li><a href="process.html"><i class="fas fa-industry"></i> 生产过程</a></li>
+                <li><a href="worth.html"><i class="fas fa-apple-alt"></i> 营养价值</a></li>
+                <li><a href="shop.html"><i class="fas fa-apple-alt"></i> 购买渠道</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-buttons">
+            <button class="btn btn-outline" id="loginBtn"><i class="fas fa-user"></i> 登录</button>
+            <button class="btn btn-primary" id="buy"><i class="fas fa-shopping-cart"></i> 下单</button>
+        </div>
+    </header>
+
+    <!-- 单张大图区域 -->
+    <section class="hero-banner">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1>牛肉营养价值 · <span>科学解析</span></h1>
+            <p>探索平凉红牛蕴含的丰富营养，了解其对健康的益处</p>
+            <button class="btn btn-primary">了解更多</button>
+        </div>
+        
+       
+    </section>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <!-- 营养特性介绍 -->
+        <div class="section-title">
+            <h2>核心营养特性</h2>
+        </div>
+        <p class="section-subtitle">平凉红牛以其独特的营养成分，成为健康饮食的理想选择</p>
+        
+        <div class="nutrition-features">
+            <!-- 优质蛋白质 -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <h3>优质蛋白质</h3>
+                    <p>肌肉生长与修复的基石</p>
+                </div>
+                <div class="feature-content">
+                    <p>牛肉中的蛋白质含有人体所需的全部必需氨基酸，特别是亮氨酸，它能有效刺激肌肉蛋白质合成，促进肌肉生长和修复。</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 每100g含蛋白质20.2克</li>
+                        <li><i class="fas fa-check-circle"></i> 提供9种必需氨基酸</li>
+                        <li><i class="fas fa-check-circle"></i> 促进肌肉生长和修复</li>
+                        <li><i class="fas fa-check-circle"></i> 维持身体组织健康</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 丰富矿物质 -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <i class="fas fa-minimize"></i>
+                    <h3>丰富矿物质</h3>
+                    <p>身体机能的重要保障</p>
+                </div>
+                <div class="feature-content">
+                    <p>牛肉是铁、锌、硒等矿物质的良好来源。铁有助于氧气运输，锌对免疫系统和伤口愈合至关重要，硒则是一种强大的抗氧化剂。</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 每100g含铁2.8毫克</li>
+                        <li><i class="fas fa-check-circle"></i> 每100g含锌4.7毫克</li>
+                        <li><i class="fas fa-check-circle"></i> 预防贫血，增强免疫力</li>
+                        <li><i class="fas fa-check-circle"></i> 促进伤口愈合和组织修复</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 维生素与健康脂肪 -->
+            <div class="feature-card">
+                <div class="feature-header">
+                    <i class="fas fa-heart"></i>
+                    <h3>维生素与健康脂肪</h3>
+                    <p>身体能量的重要来源</p>
+                </div>
+                <div class="feature-content">
+                    <p>牛肉富含多种B族维生素，特别是维生素B6和B12。这些维生素参与能量代谢、神经系统功能和红细胞形成等重要生理过程。</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> 富含维生素B6和B12</li>
+                        <li><i class="fas fa-check-circle"></i> 脂肪含量仅2.3克/100g</li>
+                        <li><i class="fas fa-check-circle"></i> 主要为不饱和脂肪酸</li>
+                        <li><i class="fas fa-check-circle"></i> 有益心血管健康</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 营养成分表 -->
+        <div class="section-title">
+            <h2>平凉红牛营养成分表</h2>
+        </div>
+        <p class="section-subtitle">每100克平凉红牛的营养成分含量</p>
+        
+        <div class="nutrition-facts">
+            <div class="facts-header">
+                <h3>详细营养成分</h3>
+                <p>科学数据，一目了然</p>
+            </div>
+            <div class="facts-content">
+                <table class="nutrition-table">
+                    <tbody>
+                        <tr>
+                            <th>营养成分</th>
+                            <th>每100克含量</th>
+                            <th>营养素参考值%</th>
+                        </tr>
+                        <tr>
+                            <td>能量</td>
+                            <td>1050千焦</td>
+                            <td>13%</td>
+                        </tr>
+                        <tr>
+                            <td>蛋白质</td>
+                            <td>21.5克</td>
+                            <td>36%</td>
+                        </tr>
+                        <tr>
+                            <td>脂肪</td>
+                            <td>8.2克</td>
+                            <td>14%</td>
+                        </tr>
+                        <tr>
+                            <td>饱和脂肪酸</td>
+                            <td>3.1克</td>
+                            <td>16%</td>
+                        </tr>
+                        <tr>
+                            <td>碳水化合物</td>
+                            <td>0.7克</td>
+                            <td>0%</td>
+                        </tr>
+                        <tr>
+                            <td>钠</td>
+                            <td>54毫克</td>
+                            <td>3%</td>
+                        </tr>
+                        <tr>
+                            <td>钾</td>
+                            <td>320毫克</td>
+                            <td>16%</td>
+                        </tr>
+                        <tr>
+                            <td>钙</td>
+                            <td>18毫克</td>
+                            <td>2%</td>
+                        </tr>
+                        <tr>
+                            <td>铁</td>
+                            <td>2.8毫克</td>
+                            <td>16%</td>
+                        </tr>
+                        <tr>
+                            <td>锌</td>
+                            <td>4.3毫克</td>
+                            <td>22%</td>
+                        </tr>
+                        <tr>
+                            <td>维生素B12</td>
+                            <td>2.1微克</td>
+                            <td>35%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 健康益处 -->
+        <div class="section-title">
+            <h2>食用平凉红牛的健康益处</h2>
+        </div>
+        <p class="section-subtitle">科学研究表明，适量食用牛肉对健康有诸多益处</p>
+        
+        <div class="health-benefits">
+            <!-- 增强体力 -->
+            <div class="benefit-card">
+                <div class="benefit-image">
+                    <img src="https://ts2.tc.mm.bing.net/th/id/OIP-C.hiqyj3r9FBYvP3LI_b4kQgHaEE?cb=thvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="增强体力">
+                </div>
+                <div class="benefit-content">
+                    <h3>增强体力与耐力</h3>
+                    <p>牛肉中的优质蛋白质和丰富的B族维生素，能够为身体提供持久的能量，增强体力和耐力，适合运动员和体力劳动者食用。</p>
+                    <p>蛋白质是肌肉修复和生长的基础，牛肉中的高生物价蛋白能有效支持肌肉功能，提高运动表现。</p>
+                </div>
+            </div>
+            
+            <!-- 促进肌肉生长 -->
+            <div class="benefit-card">
+                <div class="benefit-image">
+                    <img src="https://ts2.tc.mm.bing.net/th/id/OIP-C.XHg9PlwDATaZs5_UkV23eQHaE8?cb=thvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="肌肉生长">
+                </div>
+                <div class="benefit-content">
+                    <h3>促进肌肉生长与修复</h3>
+                    <p>牛肉中的蛋白质含有人体所需的全部必需氨基酸，特别是亮氨酸，它能有效刺激肌肉蛋白质合成，促进肌肉生长和修复。</p>
+                    <p>对于健身爱好者和康复人群，牛肉是理想的蛋白质来源，有助于肌肉恢复和生长。</p>
+                </div>
+            </div>
+            
+            <!-- 提高免疫力 -->
+            <div class="benefit-card">
+                <div class="benefit-image">
+                    <img src="https://ts3.tc.mm.bing.net/th/id/OIP-C.c9WUfM1h0hDjJ6S6OYBZqQHaE7?cb=thvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="提高免疫力">
+                </div>
+                <div class="benefit-content">
+                    <h3>提高免疫力与心血管健康</h3>
+                    <p>锌是免疫系统正常运作所必需的矿物质，而牛肉中含有丰富的锌。适量食用牛肉有助于维持免疫系统的正常功能，增强身体抵抗力。</p>
+                    <p>平凉红牛中的脂肪多为不饱和脂肪酸，特别是欧米茄-3脂肪酸，它们有助于降低胆固醇水平，减少心血管疾病的风险。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚区域 -->
+    <footer>
+        <div class="copyright">
+            <p>© 2025 杨荣 版权所有 | 20235104124</p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航按钮功能
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            // 显示登录模态框（如果使用模态框）
+            // 或跳转到登录页面
+             window.location.href ='login.html';
+        });
+        
+        document.getElementById('buy').addEventListener('click', () => {
+            // 显示下单页面
+            window.location.href = 'order.html'; 
+        });
+
+        // 滚动动画效果
+        function animateOnScroll() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            
+            featureCards.forEach((card, index) => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.9) {
+                    setTimeout(() => {
+                        card.classList.add('active');
+                    }, 200 * index);
+                }
+            });
+            
+            benefitCards.forEach((card, index) => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.9) {
+                    setTimeout(() => {
+                        card.classList.add('active');
+                    }, 200 * index);
+                }
+            });
+        }
+        
+        // 初始化滚动动画
+        document.addEventListener('DOMContentLoaded', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // 卡片悬停效果
+        document.querySelectorAll('.feature-card, .benefit-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px)';
+                card.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+            });
+        });
+		
+		
+    </script>
+</body>
+
+</html>

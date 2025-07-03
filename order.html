@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>平凉红牛 - 在线下单</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #b71c1c;
+            --dark-red: #7f0000;
+            --gold: #d4af37;
+            --light-gold: #f9e076;
+            --brown: #5d4037;
+            --light-brown: #8d6e63;
+            --cream: #f5f0e6;
+            --green: #2e7d32;
+            --dark-green: #1b5e20;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 15px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f9f5e9, #fff9c7);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, var(--gold), var(--light-gold));
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-red);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary-red);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* 导航菜单 */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--brown);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary-red);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            min-height: 70vh;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 2.5rem;
+            color: var(--dark-red);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        /* 下单页面样式 */
+        .order-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        @media (min-width: 992px) {
+            .order-container {
+                flex-direction: row;
+            }
+        }
+
+        .order-items {
+            flex: 1;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        @media (min-width: 992px) {
+            .order-summary {
+                position: sticky;
+                top: 120px;
+            }
+        }
+
+        .product-item {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .product-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-image img:hover {
+            transform: scale(1.1);
+        }
+
+        .product-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark-red);
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .product-desc {
+            color: var(--brown);
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+
+        .product-quantity {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--cream);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-red);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid #ddd;
+        }
+
+        .quantity-btn:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            padding: 8px;
+            background: white;
+        }
+
+        .product-total {
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        /* 订单摘要 */
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-red);
+        }
+
+        .summary-label {
+            color: var(--brown);
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: var(--dark-red);
+        }
+
+        .delivery-option {
+            margin: 20px 0;
+        }
+
+        .delivery-option label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 2px solid var(--cream);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .delivery-option input[type="radio"] {
+            accent-color: var(--primary-red);
+            width: 18px;
+            height: 18px;
+        }
+
+        .delivery-option label:hover {
+            border-color: var(--primary-red);
+            background: rgba(183, 28, 28, 0.05);
+        }
+
+        .delivery-option input[type="radio"]:checked + label {
+            border-color: var(--primary-red);
+            background: rgba(183, 28, 28, 0.05);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-red);
+            color: white;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(183, 28, 28, 0.5);
+        }
+
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 60px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px 15px;
+            font-size: 1rem;
+        }
+
+        .copyright p {
+            margin: 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-buttons {
+                margin-top: 15px;
+            }
+            
+            .product-item {
+                flex-direction: column;
+            }
+            
+            .product-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-cow"></i>
+            <span>平凉红牛</span>
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="product.html" class="active"><i class="fas fa-info-circle"></i> 产品介绍</a></li>
+                <li><a href="city.html"><i class="fas fa-map-marker-alt"></i> 产地特色</a></li>
+                <li><a href="process.html"><i class="fas fa-industry"></i> 生产过程</a></li>
+                <li><a href="worth.html"><i class="fas fa-apple-alt"></i> 营养价值</a></li>
+                <li><a href="shop.html"><i class="fas fa-apple-alt"></i> 购买渠道</a></li>
+            </ul>
+        </nav>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-outline" id="loginBtn"><i class="fas fa-user"></i> 登录</button>
+            <button class="btn btn-primary" id="buyBtn"><i class="fas fa-shopping-cart"></i> 下单</button>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <div class="main-content">
+        <div class="section-title">
+            <h2>在线下单</h2>
+        </div>
+        <p class="section-subtitle">选择您需要的平凉红牛产品，享受新鲜直达的美味</p>
+        
+        <div class="order-container">
+            <!-- 产品列表 -->
+            <div class="order-items">
+                <h2 class="section-title"><i class="fas fa-bullhorn"></i> 产品选择</h2>
+                
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="https://img.izhixiu.com/22/0523/22052313453.jpg" alt="红牛里脊">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <div class="product-name">红牛里脊</div>
+                            <div class="product-price">¥40/kg</div>
+                        </div>
+                        <div class="product-desc">精选牛背最长肌，肉质细腻多汁</div>
+                        <div class="product-quantity">
+                            <div class="quantity-btn minus-btn" data-id="1">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                            <input type="number" class="quantity-input" value="0" min="0" data-id="1">
+                            <div class="quantity-btn plus-btn" data-id="1">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="https://img95.699pic.com/photo/50616/1190.jpg_wh300.jpg!/fh/300/quality/90" alt="红牛肋排">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <div class="product-name">红牛肋排</div>
+                            <div class="product-price">¥42/kg</div>
+                        </div>
+                        <div class="product-desc">肉质鲜美，骨香浓郁</div>
+                        <div class="product-quantity">
+                            <div class="quantity-btn minus-btn" data-id="2">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                            <input type="number" class="quantity-input" value="0" min="0" data-id="2">
+                            <div class="quantity-btn plus-btn" data-id="2">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="https://ts2.tc.mm.bing.net/th/id/OIP-C.UECfqGAoaTOJAaLeCzyfAwHaE7?cb=thvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="红牛牛腩">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <div class="product-name">红牛牛腩</div>
+                            <div class="product-price">¥46/kg</div>
+                        </div>
+                        <div class="product-desc">适合炖煮，口感醇厚</div>
+                        <div class="product-quantity">
+                            <div class="quantity-btn minus-btn" data-id="3">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                            <input type="number" class="quantity-input" value="0" min="0" data-id="3">
+                            <div class="quantity-btn plus-btn" data-id="3">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="https://file.youlai.cn/cnkfile1/M02/72/B2/8C5BDD13D95DFD1AB537BB76E72072B2.jpeg" alt="红牛牛尾">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-header">
+                            <div class="product-name">红牛牛尾</div>
+                            <div class="product-price">¥48/kg</div>
+                        </div>
+                        <div class="product-desc">胶原丰富，滋补佳品</div>
+                        <div class="product-quantity">
+                            <div class="quantity-btn minus-btn" data-id="4">
+                                <i class="fas fa-minus"></i>
+                            </div>
+                            <input type="number" class="quantity-input" value="0" min="0" data-id="4">
+                            <div class="quantity-btn plus-btn" data-id="4">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 订单摘要 -->
+            <div class="order-summary">
+                <h2 class="section-title"><i class="fas fa-receipt"></i> 订单摘要</h2>
+                
+                <div class="summary-items">
+                    <div class="summary-item">
+                        <div class="summary-label">红牛里脊 x <span id="qty-1">0</span></div>
+                        <div class="summary-value">¥<span id="subtotal-1">0.00</span></div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">红牛肋排 x <span id="qty-2">0</span></div>
+                        <div class="summary-value">¥<span id="subtotal-2">0.00</span></div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">红牛牛腩 x <span id="qty-3">0</span></div>
+                        <div class="summary-value">¥<span id="subtotal-3">0.00</span></div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">红牛牛尾 x <span id="qty-4">0</span></div>
+                        <div class="summary-value">¥<span id="subtotal-4">0.00</span></div>
+                    </div>
+                </div>
+                
+                <div class="summary-totals">
+                    <div class="summary-item">
+                        <div class="summary-label">小计</div>
+                        <div class="summary-value">¥<span id="subtotal">0.00</span></div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">配送费</div>
+                        <div class="summary-value">¥<span id="delivery-fee">0.00</span></div>
+                    </div>
+                    <div class="summary-item summary-total">
+                        <div class="summary-label">总计</div>
+                        <div class="summary-value">¥<span id="total">0.00</span></div>
+                    </div>
+                </div>
+                
+                <div class="delivery-option">
+                    <h3 class="section-title"><i class="fas fa-truck"></i> 配送方式</h3>
+                    <input type="radio" id="delivery" name="delivery" value="delivery" checked>
+                    <label for="delivery">
+                        <i class="fas fa-truck"></i> 冷链配送 (¥15)
+                    </label>
+                    
+                    <input type="radio" id="pickup" name="delivery" value="pickup">
+                    <label for="pickup">
+                        <i class="fas fa-store"></i> 门店自提 (免费)
+                    </label>
+                </div>
+                
+                <button class="checkout-btn" id="checkoutBtn" disabled>
+                    <i class="fas fa-check-circle"></i> 提交订单
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚区域 -->
+    <footer>
+        <div class="copyright">
+            <p>© 2025 杨荣 版权所有 | 20235104124</p>
+        </div>
+    </footer>
+
+    <script>
+        // 产品数据
+        const products = [
+            { id: 1, name: "红牛里脊", price: 40 },
+            { id: 2, name: "红牛肋排", price: 42 },
+            { id: 3, name: "红牛牛腩", price: 46 },
+            { id: 4, name: "红牛牛尾", price: 48 }
+        ];
+        
+        // 获取DOM元素
+        const quantityInputs = document.querySelectorAll('.quantity-input');
+        const plusButtons = document.querySelectorAll('.plus-btn');
+        const minusButtons = document.querySelectorAll('.minus-btn');
+        const subtotalElements = document.querySelectorAll('[id^="subtotal-"]');
+        const qtyElements = document.querySelectorAll('[id^="qty-"]');
+        const subtotalElement = document.getElementById('subtotal');
+        const deliveryFeeElement = document.getElementById('delivery-fee');
+        const totalElement = document.getElementById('total');
+        const deliveryOptions = document.querySelectorAll('input[name="delivery"]');
+        const checkoutButton = document.getElementById('checkoutBtn');
+        
+        // 初始化事件监听器
+        function initEventListeners() {
+            // 数量加减按钮
+            plusButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.getAttribute('data-id');
+                    const input = document.querySelector(`.quantity-input[data-id="${id}"]`);
+                    input.value = parseInt(input.value) + 1;
+                    updateOrderSummary();
+                });
+            });
+            
+            minusButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.getAttribute('data-id');
+                    const input = document.querySelector(`.quantity-input[data-id="${id}"]`);
+                    if (parseInt(input.value) > 0) {
+                        input.value = parseInt(input.value) - 1;
+                        updateOrderSummary();
+                    }
+                });
+            });
+            
+            // 数量输入框变化
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    if (isNaN(parseInt(input.value)) || parseInt(input.value) < 0) {
+                        input.value = 0;
+                    }
+                    updateOrderSummary();
+                });
+            });
+            
+            // 配送方式选择
+            deliveryOptions.forEach(option => {
+                option.addEventListener('change', updateOrderSummary);
+            });
+        }
+        
+        // 更新订单摘要
+        function updateOrderSummary() {
+            let subtotal = 0;
+            
+            // 计算每种产品的小计
+            products.forEach(product => {
+                const qty = parseInt(document.querySelector(`.quantity-input[data-id="${product.id}"]`).value) || 0;
+                const subtotalValue = qty * product.price;
+                
+                // 更新摘要中的数量和小计
+                document.getElementById(`qty-${product.id}`).textContent = qty;
+                document.getElementById(`subtotal-${product.id}`).textContent = subtotalValue.toFixed(2);
+                
+                // 累加总小计
+                subtotal += subtotalValue;
+            });
+            
+            // 更新小计
+            subtotalElement.textContent = subtotal.toFixed(2);
+            
+            // 计算配送费
+            let deliveryFee = 0;
+            const selectedDelivery = document.querySelector('input[name="delivery"]:checked').value;
+            if (selectedDelivery === 'delivery' && subtotal > 0) {
+                deliveryFee = 15;
+            }
+            deliveryFeeElement.textContent = deliveryFee.toFixed(2);
+            
+            // 计算总计
+            const total = subtotal + deliveryFee;
+            totalElement.textContent = total.toFixed(2);
+            
+            // 启用/禁用结账按钮
+            checkoutButton.disabled = subtotal === 0;
+        }
+        
+        // 提交订单
+        checkoutButton.addEventListener('click', function() {
+            alert('订单提交成功！感谢您的购买');
+            // 重置表单
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.value = 0;
+            });
+            updateOrderSummary();
+        });
+        
+        // 初始化
+        initEventListeners();
+        updateOrderSummary();
+		document.getElementById('loginBtn').addEventListener('click', () => {
+		    // 显示登录模态框（如果使用模态框）
+		    // 或跳转到登录页面
+		     window.location.href ='login.html';
+		});
+		
+		document.getElementById('buy').addEventListener('click', () => {
+		    // 显示下单页面
+		    window.location.href = 'order.html'; 
+		});
+		
+    </script>
+</body>
+</html>
